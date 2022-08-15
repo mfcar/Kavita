@@ -688,7 +688,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy, AfterContentChe
   }
 
   openViewReorganizePages(data: Chapter) {
-    const modalRef = this.modalService.open(ReorganizePagesModalComponent, {size: 'xl'});
+    const modalRef = this.modalService.open(ReorganizePagesModalComponent, {fullscreen: true});
     modalRef.componentInstance.data = data;
     modalRef.componentInstance.parentName = this.series?.name;
     modalRef.componentInstance.seriesId = this.series?.id;
