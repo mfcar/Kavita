@@ -26,7 +26,7 @@ import { ListItemComponent } from './list-item/list-item.component';
 import { VirtualScrollerModule } from '@iharbeck/ngx-virtual-scroller';
 import { SeriesInfoCardsComponent } from './series-info-cards/series-info-cards.component';
 import { DownloadIndicatorComponent } from './download-indicator/download-indicator.component';
-import { CardReorganizePagesDrawerComponent } from './card-reorganize-pages-drawer/card-reorganize-pages-drawer.component';
+import { ReorganizePagesModalComponent } from './reorganize-pages-modal/reorganize-pages-modal.component';
 
 
 
@@ -50,7 +50,7 @@ import { CardReorganizePagesDrawerComponent } from './card-reorganize-pages-draw
     ListItemComponent,
     SeriesInfoCardsComponent,
     DownloadIndicatorComponent,
-    CardReorganizePagesDrawerComponent,
+    ReorganizePagesModalComponent,
   ],
   imports: [
     CommonModule,

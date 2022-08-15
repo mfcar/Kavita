@@ -40,9 +40,7 @@ import { PageLayoutMode } from '../_models/page-layout-mode';
 import { DOCUMENT } from '@angular/common';
 import { User } from '../_models/user';
 import { ScrollService } from '../_services/scroll.service';
-import {
-  CardReorganizePagesDrawerComponent
-} from '../cards/card-reorganize-pages-drawer/card-reorganize-pages-drawer.component';
+import {ReorganizePagesModalComponent} from '../cards/reorganize-pages-modal/reorganize-pages-modal.component';
 
 interface RelatedSeris {
   series: Series;
@@ -690,11 +688,11 @@ export class SeriesDetailComponent implements OnInit, OnDestroy, AfterContentChe
   }
 
   openViewReorganizePages(data: Chapter) {
-    const drawerRef = this.offcanvasService.open(CardReorganizePagesDrawerComponent, {position: 'bottom'});
-    drawerRef.componentInstance.data = data;
-    drawerRef.componentInstance.parentName = this.series?.name;
-    drawerRef.componentInstance.seriesId = this.series?.id;
-    drawerRef.componentInstance.libraryId = this.series?.libraryId;
+    const modalRef = this.modalService.open(ReorganizePagesModalComponent, {size: 'xl'});
+    modalRef.componentInstance.data = data;
+    modalRef.componentInstance.parentName = this.series?.name;
+    modalRef.componentInstance.seriesId = this.series?.id;
+    modalRef.componentInstance.libraryId = this.series?.libraryId;
   }
 
   openEditSeriesModal() {
