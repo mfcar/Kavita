@@ -40,6 +40,9 @@ import { PageLayoutMode } from '../_models/page-layout-mode';
 import { DOCUMENT } from '@angular/common';
 import { User } from '../_models/user';
 import { ScrollService } from '../_services/scroll.service';
+import {
+  CardReorganizePagesDrawerComponent
+} from '../cards/card-reorganize-pages-drawer/card-reorganize-pages-drawer.component';
 
 interface RelatedSeris {
   series: Series;
@@ -249,7 +252,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy, AfterContentChe
               private downloadService: DownloadService, private actionService: ActionService,
               public imageSerivce: ImageService, private messageHub: MessageHubService,
               private readingListService: ReadingListService, public navService: NavService,
-              private offcanvasService: NgbOffcanvas, @Inject(DOCUMENT) private document: Document, 
+              private offcanvasService: NgbOffcanvas, @Inject(DOCUMENT) private document: Document,
               private changeDetectionRef: ChangeDetectorRef, private scrollService: ScrollService
               ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -428,6 +431,9 @@ export class SeriesDetailComponent implements OnInit, OnDestroy, AfterContentChe
       case(Action.Edit):
         this.openViewInfo(chapter);
         break;
+      case(Action.ReorganizePages):
+        this.openViewReorganizePages(chapter);
+        break;
       case(Action.AddToReadingList):
         this.actionService.addChapterToReadingList(chapter, this.seriesId, () => {/* No Operation */ });
         break;
@@ -455,7 +461,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy, AfterContentChe
       this.seriesMetadata = metadata;
       this.changeDetectionRef.markForCheck();
     });
-    
+
     this.readingListService.getReadingListsForSeries(seriesId).subscribe(lists => {
       this.readingLists = lists;
       this.changeDetectionRef.markForCheck();
@@ -484,11 +490,11 @@ export class SeriesDetailComponent implements OnInit, OnDestroy, AfterContentChe
         this.relations = [
           ...relations.prequels.map(item => this.createRelatedSeries(item, RelationKind.Prequel)),
           ...relations.sequels.map(item => this.createRelatedSeries(item, RelationKind.Sequel)),
-          ...relations.sideStories.map(item => this.createRelatedSeries(item, RelationKind.SideStory)), 
+          ...relations.sideStories.map(item => this.createRelatedSeries(item, RelationKind.SideStory)),
           ...relations.spinOffs.map(item => this.createRelatedSeries(item, RelationKind.SpinOff)),
           ...relations.adaptations.map(item => this.createRelatedSeries(item, RelationKind.Adaptation)),
           ...relations.contains.map(item => this.createRelatedSeries(item, RelationKind.Contains)),
-          ...relations.characters.map(item => this.createRelatedSeries(item, RelationKind.Character)), 
+          ...relations.characters.map(item => this.createRelatedSeries(item, RelationKind.Character)),
           ...relations.others.map(item => this.createRelatedSeries(item, RelationKind.Other)),
           ...relations.alternativeSettings.map(item => this.createRelatedSeries(item, RelationKind.AlternativeSetting)),
           ...relations.alternativeVersions.map(item => this.createRelatedSeries(item, RelationKind.AlternativeVersion)),
@@ -683,6 +689,14 @@ export class SeriesDetailComponent implements OnInit, OnDestroy, AfterContentChe
     drawerRef.componentInstance.libraryId = this.series?.libraryId;
   }
 
+  openViewReorganizePages(data: Chapter) {
+    const drawerRef = this.offcanvasService.open(CardReorganizePagesDrawerComponent, {position: 'bottom'});
+    drawerRef.componentInstance.data = data;
+    drawerRef.componentInstance.parentName = this.series?.name;
+    drawerRef.componentInstance.seriesId = this.series?.id;
+    drawerRef.componentInstance.libraryId = this.series?.libraryId;
+  }
+
   openEditSeriesModal() {
     const modalRef = this.modalService.open(EditSeriesModalComponent, {  size: 'xl' });
     modalRef.componentInstance.series = this.series;
@@ -693,7 +707,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy, AfterContentChe
           this.series = s;
           this.changeDetectionRef.detectChanges();
         });
-        
+
         this.loadSeries(this.seriesId);
       }
 

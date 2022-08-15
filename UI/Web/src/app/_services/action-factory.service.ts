@@ -77,6 +77,10 @@ export enum Action {
    * Remove from user's Want to Read List
    */
   RemoveFromWantToReadList = 16,
+  /**
+   * Reorganize the pages of the chapter
+   */
+  ReorganizePages = 17,
 }
 
 export interface ActionItem<T> {
@@ -190,7 +194,7 @@ export class ActionFactoryService {
           callback: this.dummyCallback,
           requiresAdmin: true
         });
-    
+
         this.chapterActions.push({
           action: Action.Edit,
           title: 'Details',
@@ -265,7 +269,7 @@ export class ActionFactoryService {
     this.libraryActions = [];
 
     this.collectionTagActions = [];
-    
+
     this.seriesActions = [
       {
         action: Action.MarkAsRead,
@@ -278,7 +282,7 @@ export class ActionFactoryService {
         title: 'Mark as Unread',
         callback: this.dummyCallback,
           requiresAdmin: false
-      }, 
+      },
       {
         action: Action.AddToReadingList,
         title: 'Add to Reading List',
@@ -357,6 +361,12 @@ export class ActionFactoryService {
         callback: this.dummyCallback,
         requiresAdmin: false
       },
+      {
+        action: Action.ReorganizePages,
+        title: 'Reorganize pages',
+        callback: this.dummyCallback,
+        requiresAdmin: false
+      }
     ];
 
     this.readingListActions = [

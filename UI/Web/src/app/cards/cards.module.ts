@@ -26,6 +26,7 @@ import { ListItemComponent } from './list-item/list-item.component';
 import { VirtualScrollerModule } from '@iharbeck/ngx-virtual-scroller';
 import { SeriesInfoCardsComponent } from './series-info-cards/series-info-cards.component';
 import { DownloadIndicatorComponent } from './download-indicator/download-indicator.component';
+import { CardReorganizePagesDrawerComponent } from './card-reorganize-pages-drawer/card-reorganize-pages-drawer.component';
 
 
 
@@ -49,6 +50,7 @@ import { DownloadIndicatorComponent } from './download-indicator/download-indica
     ListItemComponent,
     SeriesInfoCardsComponent,
     DownloadIndicatorComponent,
+    CardReorganizePagesDrawerComponent,
   ],
   imports: [
     CommonModule,
@@ -65,20 +67,20 @@ import { DownloadIndicatorComponent } from './download-indicator/download-indica
     NgbTooltipModule, // Card item
     NgbCollapseModule,
     NgbRatingModule,
-    
+
     VirtualScrollerModule,
 
 
     NgbOffcanvasModule, // Series Detail, action of cards
     NgbNavModule, //Series Detail
-    NgbPaginationModule, // EditCollectionTagsComponent 
+    NgbPaginationModule, // EditCollectionTagsComponent
     NgbDropdownModule,
     NgbProgressbarModule,
     NgxFileDropModule, // Cover Chooser
     PipeModule, // filter for BulkAddToCollectionComponent
 
-    
-    
+
+
 
     SharedModule, // IconAndTitleComponent
   ],
