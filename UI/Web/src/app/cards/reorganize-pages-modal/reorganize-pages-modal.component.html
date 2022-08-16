@@ -1,7 +1,45 @@
 <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Reorganize chapter's page</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="close()">
-
-    </button>
+    <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
 </div>
-<p>reorganize-pages-modal works!</p>
+
+<form style="width: 100%">
+    <div class="modal-body scrollable-modal">
+<!--        <p>reorganize-pages-modal works!</p>-->
+<!--        <div>-->
+<!--            <pre>{{data|json}}</pre>-->
+<!--        </div>-->
+<!--        <hr>-->
+<!--        <div>-->
+<!--            <pre>{{pagesUrl|json}}</pre>-->
+<!--        </div>-->
+
+<!--        <div [ngStyle]="{'height': ScrollingBlockHeight}" class="pt-2" #scrollingBlock>-->
+<!--            <virtual-scroller #scroll [items]="pagesUrl" [bufferAmount]="1" [parentScroll]="scrollingBlock">-->
+                <div class="row-cols1  row-cols-sm-2 row-cols-md-3 row cols-lg4 g-3" #container>
+                    <ng-container *ngFor="let item of pagesUrl; let idx = index;">
+                        <div class="card">
+                            <app-image borderRadius=".25rem .25rem 0 0" height="230px" width="158px"
+                                       [imageUrl]="item"></app-image>
+                        </div>
+                    </ng-container>
+                </div>
+<!--            </virtual-scroller>-->
+<!--        </div>-->
+    </div>
+
+    <div class="modal-footer" style="justify-content: normal">
+        <div style="width: 100%;">
+            <div class="d-flex">
+                <div class="col-9 col-lg-10">
+                    <label class="form-label visually-hidden" for="add-rlist">Reading List</label>
+                    <input width="100%" #title ngbAutofocus type="text" class="form-control mb-2" id="add-rlist"
+                           formControlName="title">
+                </div>
+                <div class="col-2 ps-2">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
